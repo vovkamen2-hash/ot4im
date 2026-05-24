@@ -1033,3 +1033,104 @@ button:hover {
 .box {
   animation: fadeUp 0.6s ease;
 }
+/* ============= LIQUID THEME TRANSITION ============= */
+
+.liquid-overlay {
+    position: fixed;
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 999999;
+}
+
+.liquid-blob {
+    position: absolute;
+
+    width: 80px;
+    height: 80px;
+
+    border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
+
+    transform:
+        translate(-50%, -50%)
+        scale(0);
+
+    filter: blur(10px);
+
+    transition:
+        transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+        border-radius 0.9s ease;
+
+    animation:
+        blobMorph 3s infinite linear;
+}
+
+/* DARK */
+
+body.dark-theme .liquid-blob {
+    background:
+        radial-gradient(circle,
+        #0f0f0f 0%,
+        #000000 70%);
+}
+
+/* LIGHT */
+
+body:not(.dark-theme) .liquid-blob {
+    background:
+        radial-gradient(circle,
+        #ffffff 0%,
+        #e8e8e8 70%);
+}
+
+.liquid-overlay.active .liquid-blob {
+
+    transform:
+        translate(-50%, -50%)
+        scale(45);
+}
+
+/* МОРФИНГ ФОРМЫ */
+
+@keyframes blobMorph {
+
+    0% {
+        border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
+    }
+
+    25% {
+        border-radius: 58% 42% 30% 70% / 62% 30% 70% 38%;
+    }
+
+    50% {
+        border-radius: 30% 70% 55% 45% / 30% 60% 40% 70%;
+    }
+
+    75% {
+        border-radius: 70% 30% 40% 60% / 55% 45% 55% 45%;
+    }
+
+    100% {
+        border-radius: 42% 58% 63% 37% / 41% 44% 56% 59%;
+    }
+}
+
+/* ПЛАВНОСТЬ UI */
+
+body,
+.navbar,
+.feature-card,
+button,
+.modal-content,
+.contact-form,
+.gallery-item {
+
+    transition:
+        background-color 0.5s ease,
+        color 0.5s ease,
+        border-color 0.5s ease,
+        box-shadow 0.5s ease;
+}
