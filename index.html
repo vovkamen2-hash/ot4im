@@ -4,162 +4,359 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>OT4IM - Интерактивное говно</title>
-    <meta name="description" content="Крутое интерактивное веб-говно с минималистичным дизайном и элегантными анимациями">
+
+    <meta name="description"
+          content="Крутое интерактивное веб-говно с минималистичным дизайном и элегантными анимациями">
+
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-    <!-- ============= THEME TOGGLE ============= -->
-    <div class="theme-toggle">
-        <button id="theme-btn" class="theme-btn" onclick="toggleTheme()" aria-label="Переключить тему">
+
+<!-- ============= NAVBAR ============= -->
+
+<nav class="navbar">
+    <div class="navbar-container">
+
+        <div class="navbar-logo">
+            OT4IM ✨
+        </div>
+
+        <ul class="nav-menu">
+            <li>
+                <a href="#hero" class="nav-link active">
+                    Главная
+                </a>
+            </li>
+
+            <li>
+                <a href="#features" class="nav-link">
+                    Возможности
+                </a>
+            </li>
+
+            <li>
+                <a href="#gallery" class="nav-link">
+                    Галерея
+                </a>
+            </li>
+
+            <li>
+                <a href="#counter" class="nav-link">
+                    Счётчик
+                </a>
+            </li>
+
+            <li>
+                <a href="#contact" class="nav-link">
+                    Контакты
+                </a>
+            </li>
+        </ul>
+
+        <!-- THEME BUTTON -->
+        <button
+            id="theme-btn"
+            class="theme-btn"
+            onclick="toggleTheme()"
+            aria-label="Переключить тему">
+
             <span class="theme-icon">🌙</span>
+
         </button>
+
+    </div>
+</nav>
+
+<!-- ============= HERO SECTION ============= -->
+
+<section id="hero" class="hero">
+
+    <div class="shapes-container">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="shape shape-4"></div>
     </div>
 
-    <!-- ============= NAVBAR ============= -->
-    <nav class="navbar">
-        <div class="navbar-container">
-            <div class="navbar-logo">OT4IM ✨</div>
-            <ul class="nav-menu">
-                <li><a href="#hero" class="nav-link active">Главная</a></li>
-                <li><a href="#features" class="nav-link">Возможности</a></li>
-                <li><a href="#gallery" class="nav-link">Галерея</a></li>
-                <li><a href="#counter" class="nav-link">Счётчик</a></li>
-                <li><a href="#contact" class="nav-link">Контакты</a></li>
-            </ul>
-        </div>
-    </nav>
+    <div class="hero-content">
 
-    <!-- ============= HERO SECTION ============= -->
-    <section id="hero" class="hero">
-        <div class="shapes-container">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-            <div class="shape shape-4"></div>
+        <h1 class="hero-title">
+            Ot4im
+        </h1>
+
+        <p class="hero-subtitle">
+            Крутое интерактивное веб-говно с минималистичным дизайном и элегантными анимациями
+        </p>
+
+        <button
+            class="cta-button"
+            onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">
+
+            Поговнить! ✨
+
+        </button>
+
+    </div>
+
+</section>
+
+<!-- ============= FEATURES SECTION ============= -->
+
+<section id="features" class="features">
+
+    <h2 class="section-title">
+        ✨ Наши возможности
+    </h2>
+
+    <div class="features-grid">
+
+        <div class="feature-card">
+            <div class="feature-icon">⚡</div>
+
+            <h3>Быстрая загрузка</h3>
+
+            <p>
+                Такой себе код без зависимостей обеспечивает молниеносную работу
+            </p>
         </div>
-        
-        <div class="hero-content">
-            <h1 class="hero-title">Ot4im</h1>
-            <p class="hero-subtitle">Крутое интерактивное веб-говно с минималистичным дизайном и элегантными анимациями</p>
-            <button class="cta-button" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">
-                Поговнить! ✨
+
+        <div class="feature-card">
+            <div class="feature-icon">🎨</div>
+
+            <h3>Каловый дизайн</h3>
+
+            <p>
+                Грязный и устарелый интерфейс с элегантными анимациями
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">📱</div>
+
+            <h3>Полная адаптивность</h3>
+
+            <p>
+                Не работает на устройствах: мобильные, планшеты, десктопы
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🚀</div>
+
+            <h3>Интерактивность</h3>
+
+            <p>
+                Дёрганные переходы, эффекты КААЙФ))) , hover аниме и много говна
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ============= GALLERY SECTION ============= -->
+
+<section id="gallery" class="gallery">
+
+    <h2 class="section-title">
+        🎬 Галерея на телефоне
+    </h2>
+
+    <div class="gallery-grid">
+
+        <div class="gallery-item"
+             style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+
+            <h3>Проэкт 1</h3>
+            <p>Интерактивный вэб-кал</p>
+
+        </div>
+
+        <div class="gallery-item"
+             style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+
+            <h3>Проэкт 2</h3>
+            <p>Дэбильное приложение</p>
+
+        </div>
+
+        <div class="gallery-item"
+             style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+
+            <h3>Проэкт 3</h3>
+            <p>Дизайн фейса</p>
+
+        </div>
+
+        <div class="gallery-item"
+             style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+
+            <h3>Проэкт 4</h3>
+            <p>Дэб-сервис</p>
+
+        </div>
+
+        <div class="gallery-item"
+             style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+
+            <h3>Проэкт 5</h3>
+            <p>АнЛитическая платформа</p>
+
+        </div>
+
+        <div class="gallery-item"
+             style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+
+            <h3>Проэкт 6</h3>
+            <p>Сис тема управления</p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ============= COUNTER SECTION ============= -->
+
+<section id="counter" class="counter">
+
+    <h2 class="section-title">
+        🎯 АХАХАХАХ крути!
+    </h2>
+
+    <div class="counter-container">
+
+        <div class="progress-bar-container">
+
+            <div class="progress-bar">
+                <div id="progress-fill"></div>
+            </div>
+
+            <div class="progress-text">
+                Процессор:
+                <span id="progress-percent">0</span>%
+            </div>
+
+        </div>
+
+        <div class="counter-display">
+
+            <button
+                class="counter-btn"
+                onclick="decrementCounter()"
+                aria-label="Уменьшить счётчик">
+
+                −
+
             </button>
+
+            <div class="counter-value-wrapper">
+                <div id="counter-value">0</div>
+            </div>
+
+            <button
+                class="counter-btn"
+                onclick="incrementCounter()"
+                aria-label="Увеличить счётчик">
+
+                +
+
+            </button>
+
         </div>
-    </section>
 
-    <!-- ============= FEATURES SECTION ============= -->
-    <section id="features" class="features">
-        <h2 class="section-title">✨ Наши возможности</h2>
-        <div class="features-grid">
-            <div class="feature-card">
-                <div class="feature-icon">⚡</div>
-                <h3>Быстрая загрузка</h3>
-                <p>Такой себе код без зависимостей обеспечивает молниеносную работу</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🎨</div>
-                <h3>Каловый дизайн</h3>
-                <p>Грязный и устарелый интерфейс с элегантными анимациями</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">📱</div>
-                <h3>Полная адаптивность) </h3>
-                <p>Не работает на устройствах: мобильные, планшеты, десктопы</p>
-            </div>
-            <div class="feature-card">
-                <div class="feature-icon">🚀</div>
-                <h3>Интерактивность</h3>
-                <p>Дёрганные переходы, эффекты КААЙФ))) , hover аниме и много говна</p>
-            </div>
+        <div class="counter-hint">
+
+            💡 Используэйте кнопки
+            <strong>+</strong>
+            и
+            <strong>−</strong>
+
+            для измэнения значэээния
+
+            <br>
+
+            или нажимайте ГОРЯЧИЕ клавиши
+            <strong>+ / −</strong>
+
         </div>
-    </section>
 
-    <!-- ============= GALLERY SECTION ============= -->
-    <section id="gallery" class="gallery">
-        <h2 class="section-title">🎬 Галерея на телефоне</h2>
-        <div class="gallery-grid">
-            <div class="gallery-item" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                <h3>Проэкт 1</h3>
-                <p>Интерактивный вэб-кал</p>
-            </div>
-            <div class="gallery-item" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                <h3>Проэкт 2</h3>
-                <p>Дэбильное приложение</p>
-            </div>
-            <div class="gallery-item" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                <h3>Проэкт 3</h3>
-                <p>Дизайн фейса</p>
-            </div>
-            <div class="gallery-item" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
-                <h3>Проэкт 4</h3>
-                <p>Дэб-сервис</p>
-            </div>
-            <div class="gallery-item" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
-                <h3>Проэкт 5</h3>
-                <p>АнЛитическая платформа</p>
-            </div>
-            <div class="gallery-item" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
-                <h3>Проэкт 6</h3>
-                <p>Сис тема управления</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============= COUNTER SECTION ============= -->
-    <section id="counter" class="counter">
-        <h2 class="section-title">🎯 АХАХАХАХ крути! </h2>
-        <div class="counter-container">
-            <div class="progress-bar-container">
-                <div class="progress-bar">
-                    <div id="progress-fill"></div>
-                </div>
-                <div class="progress-text">
-                    Процессор: <span id="progress-percent">0</span>%
-                </div>
-            </div>
-
-            <div class="counter-display">
-                <button class="counter-btn" onclick="decrementCounter()" aria-label="Уменьшить счётчик">−</button>
-                <div class="counter-value-wrapper">
-                    <div id="counter-value">0</div>
-                </div>
-                <button class="counter-btn" onclick="incrementCounter()" aria-label="Увеличить счётчик">+</button>
-            </div>
-
-            <div class="counter-hint">
-                💡 Используэйте кнопки <strong>+</strong> и <strong>−</strong> для измэнения значэээния<br>
-                или нажимайте ГОРЯЧИЕ клавиши <strong>+ / −</strong>
-            </div>
-        </div>
-    </section>
-
-    <!-- ============= CONTACT SECTION ============= -->
-    <section id="contact" class="contact">
-        <h2 class="section-title">📬 Не связывайтес с нами</h2>
-        <form class="contact-form" id="contactForm">
-            <input type="text" placeholder="Ваше имя" required>
-            <input type="email" placeholder="Ваша почта" required>
-            <textarea placeholder="Ваше сообщение" rows="5" required></textarea>
-            <button type="submit" class="submit-btn">Отправить</button>
-        </form>
-    </section>
-
-    <!-- ============= FOOTER ============= -->
-    <footer class="footer">
-        <p>&copy; 2026 Ot4im - Интерактивное гэб-приложение. Все права не защищены, и защищаться не планируютса ✨</p>
-    </footer>
-
-    <!-- ============= MODAL DIALOG ============= -->
-    <div id="modal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>✨ Узззпешно!</h2>
-            <p id="modal-message"></p>
-            <button class="modal-btn" onclick="closeModal()">Zакрыть</button>
-        </div>
     </div>
 
-    <!-- Scripts -->
-    <script src="script.js"></script>
+</section>
+
+<!-- ============= CONTACT SECTION ============= -->
+
+<section id="contact" class="contact">
+
+    <h2 class="section-title">
+        📬 Не связывайтес с нами
+    </h2>
+
+    <form class="contact-form" id="contactForm">
+
+        <input
+            type="text"
+            placeholder="Ваше имя"
+            required>
+
+        <input
+            type="email"
+            placeholder="Ваша почта"
+            required>
+
+        <textarea
+            placeholder="Ваше сообщение"
+            rows="5"
+            required></textarea>
+
+        <button type="submit" class="submit-btn">
+            Отправить
+        </button>
+
+    </form>
+
+</section>
+
+<!-- ============= FOOTER ============= -->
+
+<footer class="footer">
+
+    <p>
+        &copy; 2026 Ot4im - Интерактивное гэб-приложение.
+        Все права не защищены, и защищаться не планируютса ✨
+    </p>
+
+</footer>
+
+<!-- ============= MODAL DIALOG ============= -->
+
+<div id="modal" class="modal">
+
+    <div class="modal-content">
+
+        <span class="close" onclick="closeModal()">
+            &times;
+        </span>
+
+        <h2>
+            ✨ Узззпешно!
+        </h2>
+
+        <p id="modal-message"></p>
+
+        <button class="modal-btn" onclick="closeModal()">
+            Zакрыть
+        </button>
+
+    </div>
+
+</div>
+
+<!-- Scripts -->
+
+<script src="script.js"></script>
+
 </body>
 </html>
