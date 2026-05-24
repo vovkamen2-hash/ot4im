@@ -859,9 +859,6 @@ section {
 /* ============= THEME BUTTON ============= */
 
 .theme-btn {
-    position: relative;
-    z-index: 9999;
-
     width: 48px;
     height: 48px;
 
@@ -869,22 +866,29 @@ section {
     align-items: center;
     justify-content: center;
 
+    position: fixed;
+    top: 12px;
+    right: 20px;
+
+    z-index: 99999;
+
     border: none;
     border-radius: 50%;
 
     cursor: pointer;
 
     background: white;
+    color: #ff1744;
 
     font-size: 20px;
 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.15);
 
     transition: all 0.3s ease;
 }
 
 .theme-btn:hover {
-    transform: scale(1.08);
+    transform: scale(1.1);
 }
 
 .theme-icon {
