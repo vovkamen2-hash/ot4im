@@ -1,3 +1,48 @@
+// ============= DARK THEME LOGIC =============
+
+function toggleTheme() {
+    const body = document.body;
+    const themeBtn = document.getElementById('theme-btn');
+    const themeIcon = document.querySelector('.theme-icon');
+    
+    // Toggle dark theme class
+    body.classList.toggle('dark-theme');
+    
+    // Update icon
+    if (body.classList.contains('dark-theme')) {
+        themeIcon.textContent = '☀️';
+        localStorage.setItem('theme', 'dark');
+    } else {
+        themeIcon.textContent = '🌙';
+        localStorage.setItem('theme', 'light');
+    }
+    
+    // Add animation
+    themeBtn.style.animation = 'none';
+    setTimeout(() => {
+        themeBtn.style.animation = 'toggleSwitch 0.3s ease-out';
+    }, 10);
+}
+
+// Load saved theme on page load
+document.addEventListener('DOMContentLoaded', () => {
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    
+    if (savedTheme === 'dark' || (savedTheme === null && prefersDark)) {
+        document.body.classList.add('dark-theme');
+        document.querySelector('.theme-icon').textContent = '☀️';
+    }
+});
+
+// Listen for system theme changes
+window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => {
+    if (e.matches && !localStorage.getItem('theme')) {
+        document.body.classList.add('dark-theme');
+        document.querySelector('.theme-icon').textContent = '☀️';
+    }
+});
+
 // ============= COUNTER LOGIC =============
 
 let counterValue = 0;
@@ -70,7 +115,7 @@ contactForm.addEventListener('submit', (event) => {
             isValid = false;
             input.style.borderBottom = '2px solid red';
         } else {
-            input.style.borderBottom = '2px solid #667eea';
+            input.style.borderBottom = '2px solid #ff1744';
         }
     });
 
@@ -292,5 +337,5 @@ function throttle(func, limit) {
 
 // ============= CONSOLE GREETING =============
 
-console.log('%c✨ Welcome to OT4IM! ✨', 'font-size: 20px; font-weight: bold; color: #667eea;');
-console.log('%cEnjoy exploring our interactive web app with beautiful animations!', 'font-size: 14px; color: #764ba2;');
+console.log('%c✨ Welcome to OT4IM! ✨', 'font-size: 20px; font-weight: bold; color: #ff1744;');
+console.log('%cEnjoy exploring our interactive web app with beautiful animations! Try switching the theme with the button in the top-right corner!', 'font-size: 14px; color: #c41c3b;');
