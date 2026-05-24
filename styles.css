@@ -917,3 +917,37 @@ body.dark-theme .contact-form textarea {
 body.dark-theme .footer {
     background: #000;
 }
+/* ============= DARK THEME TEXT FIX ============= */
+
+body.dark-theme,
+body.dark-theme p,
+body.dark-theme h1,
+body.dark-theme h2,
+body.dark-theme h3,
+body.dark-theme span,
+body.dark-theme div,
+body.dark-theme a,
+body.dark-theme li {
+    color: #ffffff;
+}
+
+body.dark-theme .hero-subtitle,
+body.dark-theme .feature-card p,
+body.dark-theme .progress-text,
+body.dark-theme .counter-hint,
+body.dark-theme #modal-message {
+    color: rgba(255,255,255,0.85);
+}
+
+body.dark-theme .nav-link {
+    color: white;
+}
+
+body.dark-theme .nav-link.active {
+    color: #ff1744;
+}
+
+body.dark-theme .contact-form input::placeholder,
+body.dark-theme .contact-form textarea::placeholder {
+    color: rgba(255,255,255,0.5);
+}
