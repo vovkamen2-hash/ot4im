@@ -856,3 +856,37 @@ section {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--accent-dark);
 }
+/* ============= THEME BUTTON ============= */
+
+.theme-btn {
+    position: relative;
+    z-index: 9999;
+
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border: none;
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    background: white;
+
+    font-size: 20px;
+
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+    transition: all 0.3s ease;
+}
+
+.theme-btn:hover {
+    transform: scale(1.08);
+}
+
+.theme-icon {
+    pointer-events: none;
+}
