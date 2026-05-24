@@ -957,3 +957,79 @@ body.dark-theme {
     background: #111;
     color: #fff;
 }
+/* ===== ПЛАВНЫЕ АНИМАЦИИ ===== */
+
+* {
+  scroll-behavior: smooth;
+}
+
+.card,
+button,
+.tool,
+.box {
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease,
+    background 0.35s ease,
+    border 0.35s ease;
+}
+
+/* ===== GLASS / BLUR EFFECT ===== */
+
+.card,
+.tool,
+.box {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.25);
+}
+
+/* ===== КРАСИВЫЙ HOVER ===== */
+
+.card:hover,
+.tool:hover,
+.box:hover {
+  transform: translateY(-6px) scale(1.01);
+
+  box-shadow:
+    0 12px 40px rgba(0,0,0,0.35);
+
+  border: 1px solid rgba(255,255,255,0.18);
+}
+
+/* ===== КНОПКИ ===== */
+
+button {
+  transition:
+    all 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* ===== ПЛАВНОЕ ПОЯВЛЕНИЕ ===== */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card,
+.tool,
+.box {
+  animation: fadeUp 0.6s ease;
+}
