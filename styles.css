@@ -1,73 +1,199 @@
 /* ============= CSS VARIABLES ============= */
 :root {
-    --primary: #000;
-    --secondary: #fff;
-    --accent: #ff1744;
-    --accent-dark: #c41c3b;
-    --text: #333;
-    --light-bg: #f8f9fa;
-    --border: #e0e0e0;
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    --shadow-lg: 0 20px 50px rgba(0, 0, 0, 0.15);
-    --transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --primary: #222831;
+    --secondary: #eeeeee;
+    --accent: #00adb5;
+    --accent-dark: #007a7f;
+    --text: #393e46;
+    --light-bg: #f3f4f9;
+    --border: #dcdcdc;
+    --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 8px 40px rgba(0, 0, 0, 0.2);
+    --transition: all 0.4s ease-in-out;
 }
 
-/* Убираем анимацию для смены темы */
+/* ============= GLOBAL STYLES ============= */
 body {
+    font-family: 'Poppins', sans-serif;
     background-color: var(--secondary);
     color: var(--text);
-    transition: none;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    transition: var(--transition);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: var(--primary);
+}
+
+button {
+    font-family: inherit;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+/* ============= NAVBAR ============= */
+.navbar {
+    position: fixed;
+    width: 100%;
+    background: var(--primary);
+    color: var(--secondary);
+    padding: 15px 30px;
+    box-shadow: var(--shadow);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    transition: var(--transition);
+}
+
+.navbar a {
+    color: var(--secondary);
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.navbar a:hover {
+    color: var(--accent);
+}
+
+.hero {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    color: var(--secondary);
+    animation: fadeIn 1.2s;
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.hero .hero-btn {
+    margin-top: 20px;
+    padding: 15px 40px;
+    font-size: 1rem;
+    background: var(--secondary);
+    color: var(--primary);
+    box-shadow: var(--shadow);
+    transition: var(--transition);
+}
+
+.hero .hero-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* ============= ANIMATIONS ============= */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============= SECTION ============= */
+section {
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: center;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.section-title {
+    font-size: 2.5rem;
+    color: var(--primary);
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    width: 100%;
+}
+
+.card {
+    background: var(--light-bg);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    padding: 20px;
+    transition: var(--transition);
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-lg);
+}
+
+.card h3 {
+    font-size: 1.5rem;
+    color: var(--accent);
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text);
+}
+
+/* ============= FOOTER ============= */
+.footer {
+    background: var(--primary);
+    padding: 30px 20px;
+    color: var(--secondary);
+    text-align: center;
+    box-shadow: var(--shadow);
+}
+
+.footer p {
+    margin: 0;
 }
 
 /* ============= DARK THEME ============= */
 body.dark-theme {
-    --primary: #ffffff;
-    --secondary: #121212;
+    --primary: #eeeeee;
+    --secondary: #222831;
     --text: #f5f5f5;
-    --light-bg: #1e1e1e;
+    --accent: #ff5722;
+    --accent-dark: #d84315;
+    --light-bg: #393e46;
     --border: #333333;
+    --shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+    --shadow-lg: 0 8px 40px rgba(255, 255, 255, 0.2);
 
     background-color: var(--secondary);
     color: var(--text);
 }
 
-/* Базовые стили для элементов */
 body.dark-theme .navbar {
-    background: rgba(18, 18, 18, 0.95);
+    background: var(--accent);
+    color: var(--text);
 }
 
-body.dark-theme .feature-card,
-body.dark-theme .modal-content {
-    background: #1f1f1f;
-    color: white;
-}
-
-body.dark-theme .contact-form input,
-body.dark-theme .contact-form textarea {
-    color: white;
-    background: rgba(255, 255, 255, 0.1);
-}
-
-body.dark-theme .footer {
-    background: var(--primary);
-}
-
-/* Восстановление нормального дизайна */
-.card,
-button,
-.tool,
-.box {
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-    transition: none;
-}
-
-.card:hover,
-.tool:hover,
-.box:hover {
-    transform: none;
-    box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+body.dark-theme .card {
+    background: var(--light-bg);
 }
