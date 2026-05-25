@@ -1,401 +1,448 @@
-// ============= LIQUID THEME TRANSITION =============
+```javascript
+/* ============================== */
+/* OT4IM — LIQUID GLASS SYSTEM */
+/* ============================== */
 
-function toggleTheme(event) {
+const body = document.body;
 
-    const body = document.body;
-    const themeBtn = document.getElementById('theme-btn');
-    const themeIcon = document.querySelector('.theme-icon');
+const themeBtn =
+    document.getElementById('theme-btn');
 
-    // CREATE OVERLAY
-    const overlay = document.createElement('div');
-    overlay.className = 'liquid-overlay';
+const themeIcon =
+    document.querySelector('.theme-icon');
 
-    // CREATE LIQUID BLOB
-    const blob = document.createElement('div');
-    blob.className = 'liquid-blob';
+const modal =
+    document.getElementById('modal');
 
-    // BUTTON POSITION
-    const rect = themeBtn.getBoundingClientRect();
+const contactForm =
+    document.getElementById('contactForm');
 
-    const x = rect.left + rect.width / 2;
-    const y = rect.top + rect.height / 2;
+/* ============================== */
+/* THEME SYSTEM */
+/* ============================== */
 
-    blob.style.left = `${x}px`;
-    blob.style.top = `${y}px`;
+function applyTheme(theme) {
 
-    overlay.appendChild(blob);
+    const isDark = theme === 'dark';
+
+    body.classList.toggle(
+        'dark-theme',
+        isDark
+    );
+
+    themeIcon.textContent =
+        isDark ? '☀️' : '🌙';
+
+    localStorage.setItem(
+        'theme',
+        theme
+    );
+}
+
+function toggleTheme() {
+
+    const overlay =
+        document.createElement('div');
+
+    overlay.className =
+        'liquid-overlay';
 
     document.body.appendChild(overlay);
 
-    // START ANIMATION
     requestAnimationFrame(() => {
         overlay.classList.add('active');
     });
 
-    // SWITCH THEME
+    const nextTheme =
+        body.classList.contains('dark-theme')
+            ? 'light'
+            : 'dark';
+
     setTimeout(() => {
+        applyTheme(nextTheme);
+    }, 180);
 
-        body.classList.toggle('dark-theme');
-
-        // UPDATE ICON
-        if (body.classList.contains('dark-theme')) {
-            themeIcon.textContent = '☀️';
-            localStorage.setItem('theme', 'dark');
-        } else {
-            themeIcon.textContent = '🌙';
-            localStorage.setItem('theme', 'light');
-        }
-
-    }, 250);
-
-    // REMOVE OVERLAY
     setTimeout(() => {
         overlay.remove();
     }, 900);
-
-    // BUTTON ANIMATION
-    themeBtn.style.animation = 'none';
-
-    setTimeout(() => {
-        themeBtn.style.animation = 'toggleSwitch 0.3s ease-out';
-    }, 10);
 }
 
-// ============= LOAD SAVED THEME =============
+document.addEventListener(
+    'DOMContentLoaded',
+    () => {
 
-document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme =
+            localStorage.getItem('theme');
 
-    const savedTheme = localStorage.getItem('theme');
+        const prefersDark =
+            window.matchMedia(
+                '(prefers-color-scheme: dark)'
+            ).matches;
 
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-    if (savedTheme === 'dark' || (savedTheme === null && prefersDark)) {
-
-        document.body.classList.add('dark-theme');
-
-        document.querySelector('.theme-icon').textContent = '☀️';
+        applyTheme(
+            savedTheme ||
+            (prefersDark ? 'dark' : 'light')
+        );
     }
-});
+);
 
-// ============= SYSTEM THEME CHANGES =============
-
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-
-    if (e.matches && !localStorage.getItem('theme')) {
-
-        document.body.classList.add('dark-theme');
-
-        document.querySelector('.theme-icon').textContent = '☀️';
-    }
-});
-
-// ============= COUNTER LOGIC =============
+/* ============================== */
+/* COUNTER */
+/* ============================== */
 
 let counterValue = 0;
 
 const maxValue = 100;
 
+const counterElement =
+    document.getElementById('counter-value');
+
+const progressFill =
+    document.getElementById('progress-fill');
+
+const progressPercent =
+    document.getElementById('progress-percent');
+
+function updateCounterDisplay() {
+
+    counterElement.textContent =
+        counterValue;
+
+    const percentage =
+        (counterValue / maxValue) * 100;
+
+    progressFill.style.width =
+        `${percentage}%`;
+
+    progressPercent.textContent =
+        `${Math.round(percentage)}%`;
+
+    counterElement.animate(
+        [
+            {
+                transform: 'scale(1)'
+            },
+            {
+                transform: 'scale(1.06)'
+            },
+            {
+                transform: 'scale(1)'
+            }
+        ],
+        {
+            duration: 240,
+            easing:
+                'cubic-bezier(.2,.8,.2,1)'
+        }
+    );
+}
+
 function incrementCounter() {
 
-    if (counterValue < maxValue) {
+    if (counterValue >= maxValue)
+        return;
 
-        counterValue++;
+    counterValue++;
 
-        updateCounterDisplay();
-    }
+    updateCounterDisplay();
 }
 
 function decrementCounter() {
 
-    if (counterValue > 0) {
+    if (counterValue <= 0)
+        return;
 
-        counterValue--;
+    counterValue--;
 
-        updateCounterDisplay();
-    }
+    updateCounterDisplay();
 }
 
-function updateCounterDisplay() {
+/* ============================== */
+/* MODAL */
+/* ============================== */
 
-    const counterElement = document.getElementById('counter-value');
+function openModal(message) {
 
-    const progressFill = document.getElementById('progress-fill');
-
-    const progressPercent = document.getElementById('progress-percent');
-
-    // COUNTER ANIMATION
-
-    counterElement.style.animation = 'none';
-
-    setTimeout(() => {
-
-        counterElement.style.animation = 'pulse 0.3s ease-out';
-
-    }, 10);
-
-    counterElement.textContent = counterValue;
-
-    // PROGRESS BAR
-
-    const percentage = (counterValue / maxValue) * 100;
-
-    progressFill.style.width = percentage + '%';
-
-    progressPercent.textContent = Math.round(percentage) + '%';
-}
-
-// ============= MODAL LOGIC =============
-
-const modal = document.getElementById('modal');
-
-function openModal() {
+    document.getElementById(
+        'modal-message'
+    ).textContent = message;
 
     modal.style.display = 'block';
+
+    requestAnimationFrame(() => {
+        modal.classList.add('visible');
+    });
 }
 
 function closeModal() {
 
-    modal.style.display = 'none';
+    modal.classList.remove('visible');
+
+    setTimeout(() => {
+        modal.style.display = 'none';
+    }, 250);
 }
 
-window.addEventListener('click', (event) => {
+window.addEventListener('click', (e) => {
 
-    if (event.target === modal) {
-
+    if (e.target === modal) {
         closeModal();
     }
 });
 
-// ============= FORM HANDLING =============
-
-const contactForm = document.getElementById('contactForm');
-
-contactForm.addEventListener('submit', (event) => {
-
-    event.preventDefault();
-
-    const inputs = contactForm.querySelectorAll('input, textarea');
-
-    let isValid = true;
-
-    inputs.forEach(input => {
-
-        if (!input.value.trim()) {
-
-            isValid = false;
-
-            input.style.borderBottom = '2px solid red';
-
-        } else {
-
-            input.style.borderBottom = '2px solid #ff1744';
-        }
-    });
-
-    if (isValid) {
-
-        document.getElementById('modal-message').textContent =
-            'Спасибо, ' +
-            contactForm.querySelector('input').value +
-            '! Ваше сообщение отправлено успешно!';
-
-        openModal();
-
-        contactForm.reset();
-
-        inputs.forEach(input => {
-
-            input.style.borderBottom = '';
-        });
-    }
-});
-
-// ============= NAVIGATION ACTIVE STATE =============
-
-const navLinks = document.querySelectorAll('.nav-link');
-
-function updateActiveNav() {
-
-    const scrollPosition = window.scrollY;
-
-    const sections = document.querySelectorAll('section');
-
-    sections.forEach((section) => {
-
-        const sectionTop = section.offsetTop - 100;
-
-        const sectionHeight = section.clientHeight;
-
-        const sectionId = section.getAttribute('id');
-
-        if (
-            scrollPosition >= sectionTop &&
-            scrollPosition < sectionTop + sectionHeight
-        ) {
-
-            navLinks.forEach(link => link.classList.remove('active'));
-
-            const activeLink =
-                document.querySelector(`a[href="#${sectionId}"]`);
-
-            if (activeLink) {
-
-                activeLink.classList.add('active');
-            }
-        }
-    });
-}
-
-// ============= PARALLAX EFFECT =============
-
-function parallaxEffect() {
-
-    const shapes = document.querySelectorAll('.shape');
-
-    const scrollY = window.scrollY;
-
-    shapes.forEach((shape, index) => {
-
-        const speed = 0.5 + (index * 0.1);
-
-        shape.style.transform =
-            `translateY(${scrollY * speed}px)`;
-    });
-}
-
-// ============= OPTIMIZED SCROLL =============
-
-let scrollTimeout;
-
-let isScrolling = false;
-
-function onScroll() {
-
-    if (!isScrolling) {
-
-        isScrolling = true;
-
-        updateActiveNav();
-
-        parallaxEffect();
-
-        scrollTimeout = setTimeout(() => {
-
-            isScrolling = false;
-
-        }, 100);
-    }
-}
-
-window.addEventListener('scroll', onScroll, {
-    passive: true
-});
-
-// ============= SCROLL ANIMATIONS =============
-
-const observerOptions = {
-
-    threshold: 0.1,
-
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-
-    entries.forEach((entry) => {
-
-        if (entry.isIntersecting) {
-
-            entry.target.classList.add('fade-in');
-
-            observer.unobserve(entry.target);
-        }
-    });
-
-}, observerOptions);
-
-document.addEventListener('DOMContentLoaded', () => {
-
-    const elementsToObserve = document.querySelectorAll(
-        '.feature-card, .gallery-item, .contact-form'
-    );
-
-    elementsToObserve.forEach((element) => {
-
-        observer.observe(element);
-    });
-});
-
-// ============= SMOOTH SCROLL =============
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-
-    anchor.addEventListener('click', function (e) {
+/* ============================== */
+/* FORM */
+/* ============================== */
+
+contactForm.addEventListener(
+    'submit',
+    (e) => {
 
         e.preventDefault();
 
-        const target =
-            document.querySelector(this.getAttribute('href'));
+        const fields =
+            contactForm.querySelectorAll(
+                'input, textarea'
+            );
 
-        if (target) {
+        let valid = true;
+
+        fields.forEach(field => {
+
+            const filled =
+                field.value.trim().length > 0;
+
+            field.classList.toggle(
+                'invalid',
+                !filled
+            );
+
+            if (!filled) valid = false;
+        });
+
+        if (!valid) return;
+
+        const name =
+            contactForm.querySelector(
+                'input'
+            ).value;
+
+        openModal(
+            `Спасибо, ${name}! Сообщение отправлено.`
+        );
+
+        contactForm.reset();
+    }
+);
+
+/* ============================== */
+/* NAV ACTIVE */
+/* ============================== */
+
+const sections =
+    document.querySelectorAll('section');
+
+const navLinks =
+    document.querySelectorAll('.nav-link');
+
+const navObserver =
+    new IntersectionObserver(
+
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (!entry.isIntersecting)
+                    return;
+
+                const id =
+                    entry.target.id;
+
+                navLinks.forEach(link => {
+
+                    link.classList.remove(
+                        'active'
+                    );
+
+                    if (
+                        link.getAttribute('href')
+                        === `#${id}`
+                    ) {
+
+                        link.classList.add(
+                            'active'
+                        );
+                    }
+                });
+            });
+        },
+
+        {
+            threshold: 0.45
+        }
+    );
+
+sections.forEach(section => {
+    navObserver.observe(section);
+});
+
+/* ============================== */
+/* SMOOTH SCROLL */
+/* ============================== */
+
+document
+.querySelectorAll('a[href^="#"]')
+.forEach(anchor => {
+
+    anchor.addEventListener(
+        'click',
+        (e) => {
+
+            e.preventDefault();
+
+            const target =
+                document.querySelector(
+                    anchor.getAttribute('href')
+                );
+
+            if (!target) return;
 
             target.scrollIntoView({
-
                 behavior: 'smooth',
-
                 block: 'start'
             });
         }
-    });
+    );
 });
 
-// ============= PAGE LOAD ANIMATIONS =============
+/* ============================== */
+/* SCROLL REVEAL */
+/* ============================== */
 
-window.addEventListener('load', () => {
+const revealObserver =
+    new IntersectionObserver(
 
-    document.querySelector('.navbar').style.animation =
-        'slideDown 0.6s ease-out';
+        entries => {
+
+            entries.forEach(entry => {
+
+                if (!entry.isIntersecting)
+                    return;
+
+                entry.target.classList.add(
+                    'revealed'
+                );
+
+                revealObserver.unobserve(
+                    entry.target
+                );
+            });
+        },
+
+        {
+            threshold: 0.1
+        }
+    );
+
+document
+.querySelectorAll(
+    '.feature-card, .gallery-item, .contact-form'
+)
+.forEach(el => {
+
+    el.classList.add('reveal');
+
+    revealObserver.observe(el);
 });
 
-// ============= RESPONSIVE =============
+/* ============================== */
+/* MAGNETIC BUTTONS */
+/* ============================== */
 
-let isMobileView = window.innerWidth <= 768;
+document
+.querySelectorAll(
+    '.cta-button, .submit-btn'
+)
+.forEach(button => {
 
-window.addEventListener('resize', () => {
+    button.addEventListener(
+        'mousemove',
+        e => {
 
-    const wasMobile = isMobileView;
+            const rect =
+                button.getBoundingClientRect();
 
-    isMobileView = window.innerWidth <= 768;
+            const x =
+                e.clientX -
+                rect.left -
+                rect.width / 2;
 
-    if (wasMobile !== isMobileView) {
+            const y =
+                e.clientY -
+                rect.top -
+                rect.height / 2;
 
-        console.log(
-            'View changed:',
-            isMobileView ? 'Mobile' : 'Desktop'
-        );
+            button.style.transform =
+                `translate(${x * 0.08}px, ${y * 0.08}px)`;
+        }
+    );
+
+    button.addEventListener(
+        'mouseleave',
+        () => {
+
+            button.style.transform =
+                'translate(0,0)';
+        }
+    );
+});
+
+/* ============================== */
+/* PARALLAX LIGHT */
+/* ============================== */
+
+const shapes =
+    document.querySelectorAll('.shape');
+
+window.addEventListener(
+    'scroll',
+
+    () => {
+
+        const scrollY =
+            window.scrollY;
+
+        shapes.forEach((shape, i) => {
+
+            const speed =
+                0.03 + i * 0.015;
+
+            shape.style.transform =
+                `translateY(${scrollY * speed}px)`;
+        });
+    },
+
+    {
+        passive: true
     }
-});
+);
 
-// ============= KEYBOARD NAVIGATION =============
+/* ============================== */
+/* KEYBOARD */
+/* ============================== */
 
-document.addEventListener('keydown', (e) => {
+document.addEventListener(
+    'keydown',
+    e => {
 
-    if (e.key === 'Escape') {
+        if (e.key === 'Escape') {
+            closeModal();
+        }
 
-        closeModal();
-    }
-});
-
-document.addEventListener('keydown', (e) => {
-
-    if (
-        document.activeElement ===
-        document.getElementById('counter-value') ||
-
-        document.activeElement === document.body
-    ) {
-
-        if (e.key === '+' || e.key === '=') {
+        if (
+            e.key === '+' ||
+            e.key === '='
+        ) {
 
             incrementCounter();
         }
@@ -405,91 +452,65 @@ document.addEventListener('keydown', (e) => {
             decrementCounter();
         }
     }
-});
+);
 
-// ============= ACCESSIBILITY =============
+/* ============================== */
+/* ACCESSIBILITY */
+/* ============================== */
 
-document.addEventListener('keydown', (e) => {
+document.addEventListener(
+    'keydown',
+    e => {
 
-    if (e.key === 'Tab') {
+        if (e.key === 'Tab') {
 
-        document.body.classList.add('keyboard-nav');
-    }
-});
-
-document.addEventListener('mousedown', () => {
-
-    document.body.classList.remove('keyboard-nav');
-});
-
-// ============= UTILITIES =============
-
-function getRandomGradient() {
-
-    const gradients = [
-
-        'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-
-        'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-
-        'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-
-        'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-
-        'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-
-        'linear-gradient(135deg, #30cfd0 0%, #330867 100%)'
-    ];
-
-    return gradients[
-        Math.floor(Math.random() * gradients.length)
-    ];
-}
-
-function debounce(func, wait) {
-
-    let timeout;
-
-    return function executedFunction(...args) {
-
-        const later = () => {
-
-            clearTimeout(timeout);
-
-            func(...args);
-        };
-
-        clearTimeout(timeout);
-
-        timeout = setTimeout(later, wait);
-    };
-}
-
-function throttle(func, limit) {
-
-    let inThrottle;
-
-    return function(...args) {
-
-        if (!inThrottle) {
-
-            func.apply(this, args);
-
-            inThrottle = true;
-
-            setTimeout(() => inThrottle = false, limit);
+            body.classList.add(
+                'keyboard-nav'
+            );
         }
-    };
-}
+    }
+);
 
-// ============= CONSOLE GREETING =============
+document.addEventListener(
+    'mousedown',
+    () => {
+
+        body.classList.remove(
+            'keyboard-nav'
+        );
+    }
+);
+
+/* ============================== */
+/* PAGE INTRO */
+/* ============================== */
+
+window.addEventListener(
+    'load',
+    () => {
+
+        body.classList.add('loaded');
+    }
+);
+
+/* ============================== */
+/* CONSOLE */
+/* ============================== */
 
 console.log(
-    '%c✨ Welcome to OT4IM! ✨',
-    'font-size: 20px; font-weight: bold; color: #ff1744;'
+    '%cOT4IM Liquid Glass UI',
+    `
+    font-size:20px;
+    font-weight:700;
+    color:#0071e3;
+    `
 );
 
 console.log(
-    '%cEnjoy exploring our interactive web app with beautiful animations! Try switching the theme with the button in the top-right corner!',
-    'font-size: 14px; color: #c41c3b;'
+    '%cApple-style motion system initialized.',
+    `
+    font-size:13px;
+    color:#888;
+    `
 );
+```
